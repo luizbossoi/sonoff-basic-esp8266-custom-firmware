@@ -58,6 +58,8 @@ Next step, you need to add WiFiManager library,
 3. Find for "WiFiManager"
 4. Install "WiFiManager" by tzapu, on latest version (version 0.14.0 used in this source);
 
+![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/master/images/library-wifimanager.png)
+
 Done.
 
 # Start Sonoff on flashing mode.
@@ -145,7 +147,8 @@ You can make JSON requests to get relay status and set ON/OFF, the following req
 	/json/on - Set the relay ON
 	/json/off - Set the relay OFF
 
-All responses are in JSON Format like {"device":"0000000000", "status":"on"}
+All responses are in JSON Format like:
+	{"device":"0000000000", "status":"on"}
 
 ## Default relay status
 In a case of power loss, this Firmware will not remember the last relay state and by default will set the relay as OFF.
