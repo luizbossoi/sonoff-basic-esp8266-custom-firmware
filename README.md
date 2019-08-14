@@ -157,6 +157,19 @@ You can change this behavior by changing variable "DEFAULT_RELAYSTATUS" from LOW
 ## Manual network reset
 If you want, you can reset the network by pressing one time Sonoff push button, it will reset your network configuration and restore WiFi configuration network.
 
+## Automation
+With this firmware, you are free to automate custom HTTP calls, for example, you can schedule to turn on or turn off your Sonoff relay when you desire.
+As this firmware allows JSON HTTP requests, you can create linux schedules, for example, with CURL and automate your place.
+
+A basic crontab example to turn on the light at midnight and turn off at 6 AM would be:
+	0 0 * * *	curl --silent http://Sonoff-0000000000/json/on &>/dev/null
+	0 6 * * *	curl --silent http://Sonoff-0000000000/json/off &>/dev/null
+
+RAW example of curl request to turn the relay ON:
+	curl http://Sonoff-0000000000/json/on
+
+![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/master/images/ssh-curl.png)
+
 # FAQ
 
 ### 1. Does it work with another Sonoff version?
