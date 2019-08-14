@@ -23,7 +23,7 @@ Unplug your Sonoff from the wall, remove all AC connections, you DON'T NEED to p
 # Soldering header bars
 Sonoff already has in its PCB holes, you just need to fit the four header's bar into Sonoff and solder into.
 
-![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/images/sonoff+pins.png)
+![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/master/images/sonoff+pins.png)
 
 # Attach FTDI converter on Sonoff PCB.
 Grab your female jumper cables and connect FTDI Converter on Sonoff PCB.
@@ -33,14 +33,14 @@ Grab your female jumper cables and connect FTDI Converter on Sonoff PCB.
 You have to connect in the following order:
 
 	Sonoff	<>	FTDI
-	3V3		<>	VCC
+	3V3	<>	VCC
 	RX  	<>	TX
 	TX		<>	RX
 	GND		<>	GND
 	
-![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/images/connections.png)
+![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/master/images/connections.png)
 
-![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/images/sonoff+ftdi.png)
+![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/master/images/sonoff+ftdi.png)
 
 # Prepare Arduino software
 After installed, open Arduino IDE software and follow these steps.
@@ -50,7 +50,7 @@ After installed, open Arduino IDE software and follow these steps.
 4. Find for "esp8266" 
 5. Install latest version of ESP8266 by ESP8266 Community
 
-![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/images/board-esp8266.png)
+![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/master/images/board-esp8266.png)
 
 Next step, you need to add WiFiManager library,
 1. Header menu "Tools",
@@ -100,17 +100,17 @@ Get your mobile phone (it's easier here) and list your nearby wifi networks
 You will probably see (if everything is OK!) something like "Sonoff-00000000000' wifi network. Take note of this name, it's important!
 This different network is your setup network, you have to use this network to setup our home network.
 
-![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/images/wifi1.png)
+![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/master/images/wifi1.png)
 
 Request to connect and you'll see 'Internet is unavailable', that's OK, just ignore.
 After connected, click on it again and click in "Manage Router".
 
-![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/images/wifi2.png)
+![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/master/images/wifi2.png)
 
 Your default browser will open with the configuration page, just follow the steps and it will connect to your local wifi network.
 If everything is OK, you will not see the "Sonoff-00000000" in your nearby wifi networks again.
 
-![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/images/wifi3.png)
+![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/master/images/wifi3.png)
 
 All ok?!
 
@@ -126,7 +126,7 @@ Type: http://Sonoff-0000000000/
 Can you see buttons ON - OFF / RESET?
 Using this buttons you can start / stop sonoff relay and "RESET" you can reset all network configurations, back to stock (you will be able to see the setup network again).
 
-![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/images/sonoff-website.png)
+![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/master/images/sonoff-website.png)
 
 You *CAN'T* access the URL above and can't see these buttons?
 Well, you're probably using another DNS in your computer (different from your router's default DNS) and in that case you have to identify which IP was set to your Sonoff relay.
@@ -137,7 +137,7 @@ https://play.google.com/store/apps/details?id=us.amzwaru.whousesmywifi
 
 # Additional Features
 
-##JSON
+## JSON
 
 You can make JSON requests to get relay status and set ON/OFF, the following requests can be done:
 
@@ -147,25 +147,25 @@ You can make JSON requests to get relay status and set ON/OFF, the following req
 
 All responses are in JSON Format like {"device":"0000000000", "status":"on"}
 
-##Default relay status
+## Default relay status
 In a case of power loss, this Firmware will not remember the last relay state and by default will set the relay as OFF.
 You can change this behavior by changing variable "DEFAULT_RELAYSTATUS" from LOW to HIGH.
 
-##Manual network reset
+## Manual network reset
 If you want, you can reset the network by pressing one time Sonoff push button, it will reset your network configuration and restore WiFi configuration network.
 
 # FAQ
 
-##1. Does it work with another Sonoff version?
+## 1. Does it work with another Sonoff version?
 Not tested, just with Sonoff Basic.
 
-##2. Can I fork this repository or make changes in this script
+## 2. Can I fork this repository or make changes in this script
 Feel free.
 
-##3. What happens if I push the Sonoff button?
+## 3. What happens if I push the Sonoff button?
 You will reset the Sonoff WiFi configuration to default, then the WiFi network configuration "Sonoff-0000000000" will be available again.
 
-##4. Everything was working fine, I did not reset the configuration and now I'm seeing "Sonoff-00000000" network again , why?
+## 4. Everything was working fine, I did not reset the configuration and now I'm seeing "Sonoff-00000000" network again , why?
 If you don't request a network reset, this might be related to your home WiFi settings. Maybe it changed or the signal is weak?
 When this firmware try to contact your home WiFi and it cannot be reached (due to wrong password, bad signal, interference, etc), it enables the initial network configuration back again, so you can reconfigure your Sonoff remotely, without the need to have it on hands.
 This is good, if you have this equipment inside your roof, for example.
