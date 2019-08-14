@@ -34,9 +34,9 @@ You have to connect in the following order:
 
 	Sonoff	<>	FTDI
 	3V3	<>	VCC
-	RX  	<>	TX
-	TX		<>	RX
-	GND		<>	GND
+	RX	<>	TX
+	TX	<>	RX
+	GND	<>	GND
 	
 ![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/master/images/connections.png)
 
@@ -156,16 +156,16 @@ If you want, you can reset the network by pressing one time Sonoff push button, 
 
 # FAQ
 
-## 1. Does it work with another Sonoff version?
+### 1. Does it work with another Sonoff version?
 Not tested, just with Sonoff Basic.
 
-## 2. Can I fork this repository or make changes in this script
+### 2. Can I fork this repository or make changes in this script
 Feel free.
 
-## 3. What happens if I push the Sonoff button?
+### 3. What happens if I push the Sonoff button?
 You will reset the Sonoff WiFi configuration to default, then the WiFi network configuration "Sonoff-0000000000" will be available again.
 
-## 4. Everything was working fine, I did not reset the configuration and now I'm seeing "Sonoff-00000000" network again , why?
+### 4. Everything was working fine, I did not reset the configuration and now I'm seeing "Sonoff-00000000" network again , why?
 If you don't request a network reset, this might be related to your home WiFi settings. Maybe it changed or the signal is weak?
 When this firmware try to contact your home WiFi and it cannot be reached (due to wrong password, bad signal, interference, etc), it enables the initial network configuration back again, so you can reconfigure your Sonoff remotely, without the need to have it on hands.
 This is good, if you have this equipment inside your roof, for example.
