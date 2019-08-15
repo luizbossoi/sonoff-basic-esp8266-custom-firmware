@@ -105,5 +105,6 @@ void loop() {
 
   if(digitalRead(gpio_0_button)==LOW) {
     wifiManager.resetSettings();
+    ESP.reset();
   }
 }
