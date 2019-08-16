@@ -13,7 +13,8 @@ int DEFAULT_RELAYSTATUS = LOW;
 int gpio_13_led         = 13;
 int gpio_12_relay       = 12;
 int gpio_0_button       = 0;
-
+int startPressed        = 0;
+int timeHold            = 0;
 
 ESP8266WebServer server(80);
 WiFiManager wifiManager;
@@ -85,8 +86,8 @@ void setup() {
 
   server.on("/reset", [](){
     server.send(200, "text/html", web_reset_html);
-    delay(4000);
     wifiManager.resetSettings();
+    delay(4000);
     ESP.reset();
   });
   
@@ -96,6 +97,36 @@ void setup() {
 void loop() {
   server.handleClient();
 
+  // check when sonoff button is pressed to handle relay
+  if(digitalRead(gpio_0_button)==LOW) {
+      if(startPressed==0) startPressed = millis();
+      timeHold = millis() - startPressed;
+      
+      if(digitalRead(gpio_12_relay)==HIGH) {
+        digitalWrite(gpio_12_relay, LOW);
+      } else {
+        digitalWrite(gpio_12_relay, HIGH);
+      }
+
+      // if button is pressed more than 5 seconds, reset network
+      if (timeHold >= 5000) {
+        digitalWrite(gpio_13_led, LOW);
+        
+        // just to blink 
+        delay(100); digitalWrite(gpio_13_led, HIGH); delay(100); digitalWrite(gpio_13_led, LOW); delay(100); digitalWrite(gpio_13_led, HIGH); delay(100); digitalWrite(gpio_13_led, LOW); 
+        delay(100); digitalWrite(gpio_13_led, HIGH); delay(100); digitalWrite(gpio_13_led, LOW); delay(100); digitalWrite(gpio_13_led, HIGH); delay(100); digitalWrite(gpio_13_led, LOW); 
+        digitalWrite(gpio_13_led, HIGH);
+        
+        delay(3000);
+        wifiManager.resetSettings();
+        delay(3000);
+        ESP.reset();
+      }
+  } else {
+    startPressed  = 0;
+    timeHold      = 0;
+  }
+  
   // control led
   if(digitalRead(gpio_12_relay)==HIGH) {
     digitalWrite(gpio_13_led, LOW);
@@ -103,8 +134,5 @@ void loop() {
     digitalWrite(gpio_13_led, HIGH);
   }
 
-  if(digitalRead(gpio_0_button)==LOW) {
-    wifiManager.resetSettings();
-    ESP.reset();
-  }
+ 
 }

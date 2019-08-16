@@ -156,7 +156,7 @@ In a case of power loss, this Firmware will not remember the last relay state an
 You can change this behavior by changing variable "DEFAULT_RELAYSTATUS" from LOW to HIGH.
 
 ## Manual network reset
-If you want, you can reset the network by pressing one time Sonoff push button, it will reset your network configuration and restore WiFi configuration network.
+If you want, you can reset the network by pressing Sonoff push button for 5 seconds, it will reset your network configuration and restore WiFi configuration network.
 
 ## Automation
 With this firmware, you are free to automate custom HTTP calls, for example, you can schedule to turn on or turn off your Sonoff relay when you desire.
@@ -181,7 +181,8 @@ Not tested, just with Sonoff Basic.
 Feel free.
 
 ### 3. What happens if I push the Sonoff button?
-You will reset the Sonoff WiFi configuration to default, then the WiFi network configuration "Sonoff-0000000000" will be available again.
+By default, if you press the button you can toggle the relay.
+If you press for more than 5 seconds, you will reset your Sonoff network configurations to default, then the WiFi network configuration "Sonoff-0000000000" will be available again.
 
 ### 4. Everything was working fine, I did not reset the configuration and now I'm seeing "Sonoff-00000000" network again , why?
 If you don't request a network reset, this might be related to your home WiFi settings. Maybe it changed or the signal is weak?
