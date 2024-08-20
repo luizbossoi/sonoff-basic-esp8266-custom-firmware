@@ -2,7 +2,7 @@
 
 This custom firmware allow you flash your Sonoff Basic to work HTTP based.
 With this custom firmware you don't need to hard code a static WiFi connection, you can configure your Sonoff in the first boot time.
-After flashing, you can select your desired home WiFi and make HTTP requests through the browser or using JSON calls.
+After flashing, you can select your desired home WiFi and make HTTP requests through the browser or using JSON calls. A Serial Interface is implemented for debugging purposes.
 
 It's easier to integrate with your current home automation or with your custom mobile application.
 
@@ -28,7 +28,7 @@ Sonoff already has in its PCB holes, you just need to fit the four header's bar 
 # Attach FTDI converter on Sonoff PCB.
 Grab your female jumper cables and connect FTDI Converter on Sonoff PCB.
 
-**TAKE CARE** Make sure your FTDI voltage is set to 3V3 volts instead of 5V. In this example, there is a jumper on FTDI converter where you can select the voltage.
+**TAKE CARE** Make sure your FTDI voltage is set to 3V3 volts instead of 5V. In this example, there is a jumper on FTDI converter where you can select the voltage by connecting the middle pin with the 3V3 pin.
 
 You have to connect in the following order:
 
@@ -47,8 +47,9 @@ After installed, open Arduino IDE software and follow these steps.
 1. Header menu "Tools",
 2. Boards
 3. Manage Boards
-4. Find for "esp8266" 
+4. Look for "esp8266"
 5. Install latest version of ESP8266 by ESP8266 Community
+6. In Tools -> Board -> "ESP8266" -> Select "Generic ESP8266 Module"
 
 ![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/master/images/board-esp8266.png)
 
@@ -171,6 +172,19 @@ RAW example of curl request to turn the relay ON:
 	curl http://Sonoff-0000000000/json/on
 
 ![alt text](https://raw.githubusercontent.com/luizbossoi/sonoff-basic-esp8266-custom-firmware/master/images/ssh-curl.png)
+
+## Serial Interface
+If the Sonoff is attached to the FTDI converter to your computer, you could open the Arduino IDEs Serial Monitor. It will log WiFi status changes and incoming calls of on and off.
+You could send messages to the board.
+
+  * 1 → switch the relay on
+  * 2 → switch it off, 
+  * r → reconnects the WiFi with the current credentials  
+  * w → returns the current WiFi.status()
+  * default → returns a command overview "on: 1, off: 2, reconnectWifi: r, WiFiStatus: w"
+
+## WiFi reconnect
+The WiFi Class provides a method: WiFi.setAutoReconnect(true); but that does not work as expected on my device. I added a keepWifiAlive() which is called in the loop and checks the current WiFi.status, compares it with the last and reconnects if it is not connected any more. If the WiFi Host is down for a while, the Sonoff will try to reconnect every 13s.
 
 # FAQ
 
